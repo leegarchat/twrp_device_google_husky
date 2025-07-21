@@ -41,7 +41,16 @@
 * **Maintainer:** LeeGarChat
 * **Build Date:** See Release section
 
+
+## Photos
+
+![1753057731024](image/README/1753057731024.png)
+
+![1753057739831](image/README/1753057739831.png)
+
 ---
+
+
 
 ## Installation & Releases
 
