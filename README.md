@@ -46,7 +46,7 @@
 
 ## Installation & Releases
 
-Please refer to the [Releases ](https://github.com/leegarchat/twrp_device_google_shiba/releases)section for download links and detailed installation instructions.
+Please refer to the [Releases ](https://github.com/leegarchat/twrp_device_google_husky/releases)section for download links and detailed installation instructions.
 
 ---
 
