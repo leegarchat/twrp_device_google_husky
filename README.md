@@ -41,20 +41,19 @@
 * **Maintainer:** LeeGarChat
 * **Build Date:** See Release section
 
-
-## Photos
-
-![1753057731024](image/README/1753057731024.png)
-
-![1753057739831](image/README/1753057739831.png)
-
 ---
-
-
 
 ## Installation & Releases
 
 Please refer to the [Releases ](https://github.com/leegarchat/twrp_device_google_husky/releases)section for download links and detailed installation instructions.
+
+---
+
+## Photos
+
+![1753057932442](image/README/1753057932442.png)
+
+![1753057944352](image/README/1753057944352.png)
 
 ---
 
