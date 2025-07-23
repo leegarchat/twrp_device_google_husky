@@ -109,7 +109,7 @@ export ALLOW_MISSING_DEPENDENCIES=true
 
 
 
-export FOX_USE_SPECIFIC_MAGISK_ZIP="$fox_dir/device/google/husky/root/system/bin/Magisk-29.zip"
+export FOX_USE_SPECIFIC_MAGISK_ZIP="$fox_dir/device/google/husky/recovery/root/system/bin/Magisk-29.zip"
 
 
 export FOX_VERSION=""
