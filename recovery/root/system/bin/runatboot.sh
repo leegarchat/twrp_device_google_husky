@@ -19,6 +19,43 @@
 # 	Please maintain this if you use this script or any part of it
 #
 
+declare -A tegu_value_prop=(
+        ["ro.quick_start.device_id"]="tegu"
+        ["ro.lineage.device"]="tegu"
+        ["ro.crdroid.device"]="tegu"
+        ["ro.product.system.device"]="tegu"
+        ["ro.product.system.model"]="Pixel 9a"
+        ["ro.product.system.name"]="tegu"
+        ["ro.system.build.fingerprint"]="google/tegu/tegu:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.build.display.id"]="tegu-eng 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
+        ["ro.build.flavor"]="tegu-eng"
+        ["ro.build.product"]="tegu"
+        ["ro.build.description"]="tegu-user 15 AP3A.241005.015 12366759 release-keys"
+        ["ro.display.series"]="Pixel 9a"
+        ["ro.product.vendor.device"]="tegu"
+        ["ro.product.vendor.model"]="Pixel 9a"
+        ["ro.product.vendor.name"]="tegu"
+        ["ro.product.model"]="Pixel 9a"
+        ["ro.vendor.build.fingerprint"]="google/tegu/tegu:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.board"]="tegu"
+        ["ro.product.odm.device"]="tegu"
+        ["ro.product.odm.model"]="Pixel 9a"
+        ["ro.product.odm.name"]="tegu"
+        ["ro.odm.build.fingerprint"]="google/tegu/tegu:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.product.device"]="tegu"
+        ["ro.product.product.model"]="Pixel 9a"
+        ["ro.product.product.name"]="tegu"
+        ["ro.product.build.fingerprint"]="google/tegu/tegu:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.system_ext.device"]="tegu"
+        ["ro.product.system_ext.model"]="Pixel 9a"
+        ["ro.product.system_ext.name"]="tegu"
+        ["ro.system_ext.build.fingerprint"]="google/tegu/tegu:15/AP3A.241005.015/12366759:user/release-keys"
+		["ro.product.device"]="tegu"
+		["ro.product.name"]="tegu"
+        ["ro.soc.model"]="Tensor G4"
+)
+
+
 declare -A caiman_value_prop=(
         ["ro.quick_start.device_id"]="caiman"
         ["ro.lineage.device"]="caiman"
@@ -458,6 +495,7 @@ declare -A touch_modules_devices=(
     [tokay]="heatmap goog_touch_interface sec_touch syna_touch fps_touch_handler"
     [komodo]="qbt_handler heatmap goog_touch_interface sec_touch syna_touch"
     [caiman]="heatmap goog_touch_interface sec_touch syna_touch fps_touch_handler"
+    [tegu]="heatmap goog_touch_interface syna_touch fps_touch_handler"
 )
 modules_touch="${touch_modules_devices[$device_code]}"
 modules_touch_install
