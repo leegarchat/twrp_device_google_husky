@@ -249,7 +249,40 @@ declare -A husky_value_prop=(
 		["ro.product.device"]="husky"
 		["ro.product.name"]="husky"
 )
-
+declare -A akita_value_prop=(
+        ["ro.quick_start.device_id"]="akita"
+        ["ro.lineage.device"]="akita"
+        ["ro.crdroid.device"]="akita"
+        ["ro.product.system.device"]="akita"
+        ["ro.product.system.model"]="Pixel 8a"
+        ["ro.product.system.name"]="akita"
+        ["ro.system.build.fingerprint"]="google/akita/akita:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.build.display.id"]="akita-eng 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
+        ["ro.build.flavor"]="akita-eng"
+        ["ro.build.product"]="akita"
+        ["ro.build.description"]="akita-user 15 AP3A.241005.015 12366759 release-keys"
+        ["ro.display.series"]="Pixel 8a"
+        ["ro.product.vendor.device"]="akita"
+        ["ro.product.vendor.model"]="Pixel 8a"
+        ["ro.product.vendor.name"]="akita"
+        ["ro.product.model"]="Pixel 8a"
+        ["ro.vendor.build.fingerprint"]="google/akita/akita:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.board"]="akita"
+        ["ro.product.odm.device"]="akita"
+        ["ro.product.odm.model"]="Pixel 8a"
+        ["ro.product.odm.name"]="akita"
+        ["ro.odm.build.fingerprint"]="google/akita/akita:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.product.device"]="akita"
+        ["ro.product.product.model"]="Pixel 8a"
+        ["ro.product.product.name"]="akita"
+        ["ro.product.build.fingerprint"]="google/akita/akita:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.system_ext.device"]="akita"
+        ["ro.product.system_ext.model"]="Pixel 8a"
+        ["ro.product.system_ext.name"]="akita"
+        ["ro.system_ext.build.fingerprint"]="google/akita/akita:15/AP3A.241005.015/12366759:user/release-keys"
+		["ro.product.device"]="akita"
+		["ro.product.name"]="akita"
+)
 
 update_keys_in_file() {
     declare -n key_value_pairs="$1"
@@ -409,6 +442,7 @@ unzip_magiskboot_binary(){
     rm -rf magisk_unzip
 }
 
+
 setenforce 0
 LOGF=/tmp/recovery.log;
 device_code=`getprop ro.hardware`;
@@ -423,7 +457,7 @@ declare -A touch_modules_devices=(
     [akita]="goodixfp heatmap goog_touch_interface goodix_brl_touch fps_touch_handler"
     [tokay]="heatmap goog_touch_interface sec_touch syna_touch fps_touch_handler"
     [komodo]="qbt_handler heatmap goog_touch_interface sec_touch syna_touch"
-    [caiman]="qbt_handler heatmap goog_touch_interface sec_touch syna_touch"
+    [caiman]="heatmap goog_touch_interface sec_touch syna_touch fps_touch_handler"
 )
 modules_touch="${touch_modules_devices[$device_code]}"
 modules_touch_install
