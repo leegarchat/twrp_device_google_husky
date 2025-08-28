@@ -19,6 +19,78 @@
 # 	Please maintain this if you use this script or any part of it
 #
 
+declare -A tokay_value_prop=(
+        ["ro.quick_start.device_id"]="tokay"
+        ["ro.lineage.device"]="tokay"
+        ["ro.crdroid.device"]="tokay"
+        ["ro.product.system.device"]="tokay"
+        ["ro.product.system.model"]="Pixel 9"
+        ["ro.product.system.name"]="tokay"
+        ["ro.system.build.fingerprint"]="google/tokay/tokay:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.build.display.id"]="tokay-eng 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
+        ["ro.build.flavor"]="tokay-eng"
+        ["ro.build.product"]="tokay"
+        ["ro.build.description"]="tokay-user 15 AP3A.241005.015 12366759 release-keys"
+        ["ro.display.series"]="Pixel 9"
+        ["ro.product.vendor.device"]="tokay"
+        ["ro.product.vendor.model"]="Pixel 9"
+        ["ro.product.vendor.name"]="tokay"
+        ["ro.product.model"]="Pixel 9"
+        ["ro.vendor.build.fingerprint"]="google/tokay/tokay:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.board"]="tokay"
+        ["ro.product.odm.device"]="tokay"
+        ["ro.product.odm.model"]="Pixel 9"
+        ["ro.product.odm.name"]="tokay"
+        ["ro.odm.build.fingerprint"]="google/tokay/tokay:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.product.device"]="tokay"
+        ["ro.product.product.model"]="Pixel 9"
+        ["ro.product.product.name"]="tokay"
+        ["ro.product.build.fingerprint"]="google/tokay/tokay:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.system_ext.device"]="tokay"
+        ["ro.product.system_ext.model"]="Pixel 9"
+        ["ro.product.system_ext.name"]="tokay"
+        ["ro.system_ext.build.fingerprint"]="google/tokay/tokay:15/AP3A.241005.015/12366759:user/release-keys"
+		["ro.product.device"]="tokay"
+		["ro.product.name"]="tokay"
+        ["ro.soc.model"]="Tensor G4"
+)
+
+
+declare -A komodo_value_prop=(
+        ["ro.quick_start.device_id"]="komodo"
+        ["ro.lineage.device"]="komodo"
+        ["ro.crdroid.device"]="komodo"
+        ["ro.product.system.device"]="komodo"
+        ["ro.product.system.model"]="Pixel 9 Pro XL"
+        ["ro.product.system.name"]="komodo"
+        ["ro.system.build.fingerprint"]="google/komodo/komodo:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.build.display.id"]="komodo-eng 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
+        ["ro.build.flavor"]="komodo-eng"
+        ["ro.build.product"]="komodo"
+        ["ro.build.description"]="komodo-user 15 AP3A.241005.015 12366759 release-keys"
+        ["ro.display.series"]="Pixel 9 Pro XL"
+        ["ro.product.vendor.device"]="komodo"
+        ["ro.product.vendor.model"]="Pixel 9 Pro XL"
+        ["ro.product.vendor.name"]="komodo"
+        ["ro.product.model"]="Pixel 9 Pro XL"
+        ["ro.vendor.build.fingerprint"]="google/komodo/komodo:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.board"]="komodo"
+        ["ro.product.odm.device"]="komodo"
+        ["ro.product.odm.model"]="Pixel 9 Pro XL"
+        ["ro.product.odm.name"]="komodo"
+        ["ro.odm.build.fingerprint"]="google/komodo/komodo:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.product.device"]="komodo"
+        ["ro.product.product.model"]="Pixel 9 Pro XL"
+        ["ro.product.product.name"]="komodo"
+        ["ro.product.build.fingerprint"]="google/komodo/komodo:15/AP3A.241005.015/12366759:user/release-keys"
+        ["ro.product.system_ext.device"]="komodo"
+        ["ro.product.system_ext.model"]="Pixel 9 Pro XL"
+        ["ro.product.system_ext.name"]="komodo"
+        ["ro.system_ext.build.fingerprint"]="google/komodo/komodo:15/AP3A.241005.015/12366759:user/release-keys"
+		["ro.product.device"]="komodo"
+		["ro.product.name"]="komodo"
+        ["ro.soc.model"]="Tensor G4"
+)
 
 
 declare -A general_value_props=(
@@ -80,10 +152,10 @@ declare -A shiba_value_prop=(
         ["ro.product.system.model"]="Pixel 8"
         ["ro.product.system.name"]="shiba"
         ["ro.system.build.fingerprint"]="google/shiba/shiba:15/AP3A.241005.015/12366759:user/release-keys"
-        ["ro.build.display.id"]="shiba-userdebug 99.87.36 AP3A.241005.015 eng.trijal.20240907.130349 test-keys"
+        ["ro.build.display.id"]="shiba-userdebug 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
         ["ro.build.flavor"]="shiba-userdebug"
         ["ro.build.product"]="shiba"
-        ["ro.build.description"]="shiba-user 14 AP2A.240805.005 12025142 release-keys"
+        ["ro.build.description"]="shiba-user 15 AP3A.241005.015 12366759 release-keys"
         ["ro.display.series"]="Pixel 8"
         ["ro.product.vendor.device"]="shiba"
         ["ro.product.vendor.model"]="Pixel 8"
@@ -115,10 +187,10 @@ declare -A husky_value_prop=(
         ["ro.product.system.model"]="Pixel 8 Pro"
         ["ro.product.system.name"]="husky"
         ["ro.system.build.fingerprint"]="google/husky/husky:15/AP3A.241005.015/12366759:user/release-keys"
-        ["ro.build.display.id"]="husky-eng 99.87.36 AP3A.241005.015 eng.trijal.20240907.130349 test-keys"
+        ["ro.build.display.id"]="husky-eng 99.87.36 AP3A.241005.015 eng.leegar.20240907.130349 test-keys"
         ["ro.build.flavor"]="husky-eng"
         ["ro.build.product"]="husky"
-        ["ro.build.description"]="husky-user 14 AP2A.240805.005 12025142 release-keys"
+        ["ro.build.description"]="husky-user 15 AP3A.241005.015 12366759 release-keys"
         ["ro.display.series"]="Pixel 8 Pro"
         ["ro.product.vendor.device"]="husky"
         ["ro.product.vendor.model"]="Pixel 8 Pro"
@@ -141,6 +213,7 @@ declare -A husky_value_prop=(
 		["ro.product.device"]="husky"
 		["ro.product.name"]="husky"
 )
+
 
 update_keys_in_file() {
     declare -n key_value_pairs="$1"
@@ -171,6 +244,7 @@ slot_detect(){
             ;;
     esac
 }
+
 
 modules_touch_install(){
     mkdir -vp \
