@@ -173,45 +173,102 @@ slot_detect(){
 }
 
 modules_touch_install(){
-    modules_touch="goodixfp heatmap goog_touch_interface sec_touch ftm5 goodix_brl_touch"
-
     mkdir -vp \
         /dev/modules_inject/vendor_dlkm_a \
         /dev/modules_inject/vendor_dlkm_b
 
-    if mount -r /dev/block/mapper/vendor_dlkm$suffix /dev/modules_inject/vendor_dlkm$suffix ; then 
-        for module in $modules_touch ; do
-            files_finded=$(find /dev/modules_inject/vendor_dlkm$suffix /system/modules_touch | grep "${module}.ko" )
+    try_load_modules_from_path() {
+        local path="$1"
+        local loaded_any=0
+        local missing_modules=()
+        for module in $modules_touch; do
+            files_finded=$(find "$path" 2>/dev/null | grep "${module}.ko$")
+            if [ -z "$files_finded" ]; then
+                missing_modules+=("$module")
+                continue
+            fi
             for f in $files_finded; do
-                insmod $f;
+                insmod "$f" 2>>$LOGF
                 if [ $? -eq 0 ]; then
-                    echo "I:modules_fix1: $module unloaded successfully!" >> $LOGF;
+                    echo "I:modules: $module loaded successfully from $f" >> $LOGF
+                    loaded_any=1
                 else
-                    echo "E:modules_fix1: Cannot unload $module!" >> $LOGF;
+                    echo "E:modules: Cannot load $module from $f" >> $LOGF
+                    missing_modules+=("$module")
                 fi
             done
         done
-    else
-        if lptools_new --slot $unslot --suffix $unsuffix --map vendor_dlkm$unsuffix ; then
-            if mount -r /dev/block/mapper/vendor_dlkm$unsuffix /dev/modules_inject/vendor_dlkm$unsuffix ; then
-                for module in $modules_touch ; do
-                    files_finded=$(find /dev/modules_inject/vendor_dlkm$unsuffix /system/modules_touch | grep "${module}.ko" )
-                    for f in $files_finded; do
-                        insmod $f;
-                        if [ $? -eq 0 ]; then
-                            echo "I:modules_fix1: $module unloaded successfully!" >> $LOGF;
-                        else
-                            echo "E:modules_fix1: Cannot unload $module!" >> $LOGF;
-                        fi
-                    done
-                done
-            else
-                echo "E:modules_fix1: Cannot mount /dev/block/mapper/vendor_dlkm$unsuffix!" >> $LOGF;
+        echo "${missing_modules[*]}"
+        return $loaded_any
+    }
+
+    check_modules_loaded() {
+        local missing=()
+        for module in $modules_touch; do
+            if ! lsmod | grep -q "$module"; then
+                missing+=("$module")
             fi
+        done
+        if [ ${#missing[@]} -gt 0 ]; then
+            echo "E:modules: Missing modules: ${missing[*]}" >> $LOGF
+            return 1
         else
-            echo "E:modules_fix1: Cannot map /dev/block/mapper/vendor_dlkm$unsuffix!" >> $LOGF;
+            echo "I:modules: All modules loaded successfully" >> $LOGF
+            return 0
         fi
+    }
+
+    # --- функция попытки монтирования и загрузки ---
+    try_slot() {
+        local blk="$1"
+        local mnt="$2"
+        local slot_name="$3"
+        local slot_num="$4"
+
+        if [ ! -b "$blk" ]; then
+            echo "W:modules: $blk not found, trying to map..." >> $LOGF
+            if ! lptools_new --slot "$slot_num" --suffix "$slot_name" --map vendor_dlkm"$slot_name" ; then
+                echo "E:modules: Failed to map $blk" >> $LOGF
+                return 1
+            fi
+        fi
+
+        if mount -r "$blk" "$mnt"; then
+            echo "I:modules: Mounted $blk on $mnt" >> $LOGF
+            missing=$(try_load_modules_from_path "$mnt")
+            umount "$mnt"
+            echo "I:modules: Unmounted $mnt" >> $LOGF
+            [ -z "$missing" ] && return 0  # все модули загружены
+            echo "W:modules: Missing modules after $slot_name slot attempt: $missing" >> $LOGF
+            return 1
+        else
+            echo "E:modules: Cannot mount $blk" >> $LOGF
+            return 1
+        fi
+    }
+
+    # --- основной алгоритм ---
+
+    echo "I:modules: Trying current slot $suffix" >> $LOGF
+    try_slot "/dev/block/mapper/vendor_dlkm$suffix" "/dev/modules_inject/vendor_dlkm$suffix" "$suffix" "$slot"
+    res=$?
+
+    if [ $res -ne 0 ]; then
+        echo "I:modules: Trying opposite slot $unsuffix" >> $LOGF
+        try_slot "/dev/block/mapper/vendor_dlkm$unsuffix" "/dev/modules_inject/vendor_dlkm$unsuffix" "$unsuffix" "$unslot"
+        res=$?
     fi
+
+    # Если все равно что-то не загружено — пробуем чисто /system/modules_touch
+    check_modules_loaded || {
+        echo "I:modules: Trying fallback /system/modules_touch" >> $LOGF
+        missing=$(try_load_modules_from_path "/system/modules_touch")
+        check_modules_loaded || {
+            echo "E:modules: Final failure, modules still missing: $missing" >> $LOGF
+            echo "I:modules: Currently loaded modules:" >> $LOGF
+            lsmod >> $LOGF
+        }
+    }
 }
 
 fix_kerror7(){
@@ -250,6 +307,7 @@ device_code=`getprop ro.hardware`;
 
 fix_bootcontrol_and_SPL_downgrade_wipe
 slot_detect
+modules_touch="goodixfp heatmap goog_touch_interface sec_touch ftm5 goodix_brl_touch"
 modules_touch_install
 fix_kerror7
 update_keys_in_file general_value_props;
