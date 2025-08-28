@@ -307,7 +307,15 @@ device_code=`getprop ro.hardware`;
 
 fix_bootcontrol_and_SPL_downgrade_wipe
 slot_detect
-modules_touch="goodixfp heatmap goog_touch_interface sec_touch ftm5 goodix_brl_touch"
+declare -A touch_modules_devices=(
+    [shiba]="goodixfp heatmap goog_touch_interface sec_touch ftm5 goodix_brl_touch"
+    [husky]="goodixfp heatmap goog_touch_interface sec_touch ftm5 goodix_brl_touch"
+    [akita]="goodixfp heatmap goog_touch_interface goodix_brl_touch fps_touch_handler"
+    [tokay]="heatmap goog_touch_interface sec_touch syna_touch fps_touch_handler"
+    [komodo]="qbt_handler heatmap goog_touch_interface sec_touch syna_touch"
+    [caiman]="qbt_handler heatmap goog_touch_interface sec_touch syna_touch"
+)
+modules_touch="${touch_modules_devices[$device_code]}"
 modules_touch_install
 fix_kerror7
 update_keys_in_file general_value_props;
